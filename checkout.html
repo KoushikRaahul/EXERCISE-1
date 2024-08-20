@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Clothing Store</title>
+    <link rel="stylesheet" href="styles3.css">
+</head>
+<body>
+    <div class="checkout-container">
+        <h1>Checkout</h1>
+        <div class="cart-actions">
+            <button onclick="emptyCart()" class="empty-cart-btn">Empty Cart</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="total-container">
+            <h3 id="total-price">Total: 0₹</h3>
+        </div>
+        <form action="#" class="payment-form">
+            <h2>Payment Details</h2>
+            <div class="input-group">
+                <label for="card-name">Name on Card</label>
+                <input type="text" id="card-name" placeholder="Enter name on card" required>
+            </div>
+            <div class="input-group">
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" placeholder="Enter card number" required>
+            </div>
+            <div class="input-group">
+                <label for="expiry">Expiry Date</label>
+                <input type="text" id="expiry" placeholder="MM/YY" required>
+            </div>
+            <div class="input-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" placeholder="Enter CVV" required>
+            </div>
+            <button type="submit" class="checkout-btn">Complete Purchase</button>
+        </form>
+    </div>
+
+    <script>
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsContainer = document.getElementById('cart-items');
+            let totalPrice = 0;
+
+            cartItemsContainer.innerHTML = ''; 
+
+            if (cart.length > 0) {
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('cart-item');
+
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <h3>${item.name}</h3>
+                            <p class="price">${item.price}₹</p>
+                        </div>
+                        <p class="quantity">Quantity: 1</p>
+                    `;
+
+                    cartItemsContainer.appendChild(cartItem);
+                    totalPrice += item.price;
+                });
+
+                document.getElementById('total-price').textContent = `Total: ${totalPrice}₹`;
+            } else {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+                document.getElementById('total-price').textContent = 'Total: 0₹';
+            }
+        }
+
+        function emptyCart() {
+            localStorage.removeItem('cart'); 
+            loadCart(); 
+        }
+
+        window.onload = loadCart;
+    </script>
+</body>
+</html>

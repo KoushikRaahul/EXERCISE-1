@@ -1,0 +1,88 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Store Products</title>
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+    <div class="video-container">
+        <!-- <video autoplay muted loop class="video-background">
+            <source src="/Users/koushikraahulgmail.com/FS/A1/pictures/video2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video> -->
+    </div>
+
+    <div class="content-container">
+        <div class="header">
+            <h1>Our Products</h1>
+            <a href="checkout.html" class="cart-btn">
+                <img src="/Users/koushikraahulgmail.com/FS/A1/pictures/cart.jpeg" alt="Cart Icon" class="cart-icon"> Cart (0)
+            </a>
+        </div>
+        <div class="products-container">
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="/Users/koushikraahulgmail.com/FS/A1/pictures/product1.jpeg" alt="Product 1" class="product-image">
+                    <h3>Born in 1975 Drop Hand Tee</h3>
+                    <p class="price">1299₹</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Born in 1975 Drop Hand Tee', 1299, '/Users/koushikraahulgmail.com/FS/A1/pictures/product1.jpeg')">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="/Users/koushikraahulgmail.com/FS/A1/pictures/product2.jpeg" alt="Product 2" class="product-image">
+                    <h3>Flip Twist Drop Hand Tee</h3>
+                    <p class="price">1699₹</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Flip Twist Drop Hand Tee', 1699, '/Users/koushikraahulgmail.com/FS/A1/pictures/product2.jpeg')">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="/Users/koushikraahulgmail.com/FS/A1/pictures/product3.jpeg" alt="Product 3" class="product-image">
+                    <h3>Brown Colour Loafers</h3>
+                    <p class="price">1999₹</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Brown Colour Loafers', 1999, '/Users/koushikraahulgmail.com/FS/A1/pictures/product3.jpeg')">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="/Users/koushikraahulgmail.com/FS/A1/pictures/product4.jpeg" alt="Product 4" class="product-image">
+                    <h3>Beige Color Loafers</h3>
+                    <p class="price">1799₹</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Beige Color Loafers', 1799, '/Users/koushikraahulgmail.com/FS/A1/pictures/product4.jpeg')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup" class="popup">
+        <p>Item added to cart!</p>
+    </div>
+
+    <script>
+        let cartCount = 0;
+
+        function addToCart(productName, price, imageUrl) {
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+
+            cart.push({ name: productName, price: price, image: imageUrl });
+
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+
+            cartCount = cart.length;
+            document.querySelector('.cart-btn').innerHTML = `<img src="/Users/koushikraahulgmail.com/FS/A1/pictures/cart.jpeg" alt="Cart Icon" class="cart-icon"> Cart (${cartCount})`;
+
+
+            showPopup();
+        }
+
+        function showPopup() {
+            const popup = document.getElementById('popup');
+            popup.classList.add('show');
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
